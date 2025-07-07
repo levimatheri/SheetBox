@@ -1,15 +1,13 @@
-package com.example.sheetbox.data.entities
+package com.example.sheetbox.core.domain
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.time.LocalDateTime
-import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
+import java.util.UUID
 
-@OptIn(ExperimentalUuidApi::class)
-@Entity
+@Entity(tableName = "scores")
 data class Score(
-    @PrimaryKey(autoGenerate = true) val id: Uuid,
+    @PrimaryKey() val id: UUID = UUID.randomUUID(),
     val title: String,
     val composer: String?,
     val tags: List<String> = emptyList(), // Serialize with a type converter

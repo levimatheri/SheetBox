@@ -1,11 +1,9 @@
-package com.example.sheetbox.data.converters
+package com.example.sheetbox.core.data.converters
 
 import androidx.room.TypeConverter
 import java.time.LocalDateTime
-import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
+import java.util.UUID
 
-@OptIn(ExperimentalUuidApi::class)
 class Converters {
     @TypeConverter
     fun fromTagsList(tags: List<String>): String = tags.joinToString(separator = ",")
@@ -14,10 +12,10 @@ class Converters {
     fun toTagsList(tagsString: String): List<String> = tagsString.split(",").filter { it.isNotBlank() }
 
     @TypeConverter
-    fun fromUUID(uuid: Uuid): String = uuid.toString()
+    fun fromUUID(uuid: UUID): String = uuid.toString()
 
     @TypeConverter
-    fun toUUID(uuid: String): Uuid = Uuid.parse(uuid)
+    fun toUUID(uuid: String): UUID = UUID.fromString(uuid)
 
     @TypeConverter
     fun fromDate(date: LocalDateTime): String = date.toString()
