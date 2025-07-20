@@ -12,4 +12,21 @@ import com.example.sheetbox.core.domain.Score
 @OptIn(kotlin.uuid.ExperimentalUuidApi::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun scoreDao(): ScoreDao
+
+    companion object {
+        @Volatile
+        private var INSTANCE: AppDatabase? = null
+
+        fun getInstance(context: android.content.Context): AppDatabase {
+            return INSTANCE ?: synchronized(this) {
+                val instance = androidx.room.Room.databaseBuilder(
+                    context.applicationContext,
+                    AppDatabase::class.java,
+                    "sheetbox_db"
+                ).build()
+                INSTANCE = instance
+                instance
+            }
+        }
+    }
 }

@@ -9,10 +9,10 @@ import java.util.UUID
 data class Score(
     @PrimaryKey() val id: UUID = UUID.randomUUID(),
     val title: String,
-    val composer: String?,
+    val composer: String? = null,
     val tags: List<String> = emptyList(), // Serialize with a type converter
     val filePath: String,
     val pageCount: Int,
-    val lastOpened: LocalDateTime?,
+    val lastOpened: LocalDateTime? = null,
     val addedDate: LocalDateTime = LocalDateTime.now()
 )
